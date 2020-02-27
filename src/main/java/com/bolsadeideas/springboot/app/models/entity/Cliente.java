@@ -11,6 +11,11 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 
 /*La anotación @Entity nos indica que esta clase se refiere a una 
@@ -52,7 +57,15 @@ import javax.persistence.TemporalType;
  * 
  * La anotación @Temporal indica el formato de fecha que se guardara en la base de dato
  * se puede guardar solo la fecha, fecha con hora, etc.
- * */
+ * 
+ * 
+ * La anotación @DateTimeFormat funciona para colocar el tipo de formato que
+ * queramos utilizar para la fecha
+ * 
+ * 
+ * Las anotaciones @NotEmpty, @NotNull, @Email, son validaciones para los campos
+ * en la base de datos*/
+
 @Entity
 @Table(name = "clientes")
 public class Cliente implements Serializable{
@@ -62,14 +75,32 @@ public class Cliente implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
+	
+	@NotEmpty
 	private String nombre;
+	
+	@NotEmpty
 	private String apellido;
+	
+	@NotEmpty
+	@Email
 	private String email;
 
+	@NotNull
 	@Column(name = "create_at")
 	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date createAt;
+	
+	/*Este metodo funciona para colocar la fecha actual, esta comentada
+	 * debido a que se modifico el formulario para agregar la fecha
+	 * manual, si desea que la fecha se guarde en la BD automaticamente
+	 * descomente este metodo y retire el campo de fecha del formulario*
+	 
+	@PrePersist
+	public void prePersist() {
+		createAt = new Date();
+	}*/
 
 	public Long getId() {
 		return id;

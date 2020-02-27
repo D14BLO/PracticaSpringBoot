@@ -40,11 +40,20 @@ public class ClienteDaoImpl implements IClienteDao {
 	@PersistenceContext
 	private EntityManager em;
    
+	//Método para listar clientes, se llama en la interface
     @SuppressWarnings("unchecked")
     @Transactional(readOnly=true)
 	@Override
 	public List<Cliente> findAll() {
 		return em.createQuery("from Cliente").getResultList();
+	}
+
+    
+    //Método para gurdar/registrar cliente, se llama en la interface
+	@Override
+	@Transactional
+	public void save(Cliente cliente) {
+		em.persist(cliente);		
 	}
 
 }
