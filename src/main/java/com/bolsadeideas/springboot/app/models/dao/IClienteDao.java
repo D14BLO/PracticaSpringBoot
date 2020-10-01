@@ -1,14 +1,13 @@
 package com.bolsadeideas.springboot.app.models.dao;
 
-import java.util.List;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
 import com.bolsadeideas.springboot.app.models.entity.Cliente;
 
-public interface IClienteDao {
-	
-	//metodo para listar clientes
-	public List<Cliente> findAll();
-	
-	//metodo para registrar clientes
-	public void save(Cliente cliente);
+/*Esta interface ahora extiende de PagingAndSortingRepository en ves de 
+ * CrudRepository ya que se utiliza para el paginador y a su vez esta
+ * extiende de CrudRepository por lo cual los metodos utilizados con CrudRepository
+ * se siguen manteniendo*/
+public interface IClienteDao extends PagingAndSortingRepository<Cliente, Long> {
+
 }

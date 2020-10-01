@@ -92,6 +92,8 @@ public class Cliente implements Serializable{
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date createAt;
 	
+	private String foto;
+	
 	/*Este metodo funciona para colocar la fecha actual, esta comentada
 	 * debido a que se modifico el formulario para agregar la fecha
 	 * manual, si desea que la fecha se guarde en la BD automaticamente
@@ -140,6 +142,14 @@ public class Cliente implements Serializable{
 
 	public void setCreateAt(Date createAt) {
 		this.createAt = createAt;
+	}
+
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
 	}
 
 }
